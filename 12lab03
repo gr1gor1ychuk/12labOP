@@ -1,0 +1,28 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+int main()
+{
+    FILE *f1, *f2;
+    f1 = fopen("file123.pdf", "rb");
+    f2 = fopen("file321.pdf", "wb");
+    if(f1 == NULL || f2 == NULL)
+        {
+        printf("CANNOT OPEN THE FILE");
+        exit(0);
+        }
+    else
+    {
+        int a;
+        a = fgetc(f1);
+        while(a!=EOF)
+        {
+            fputc(a, f2);
+            a = fgetc(f1);
+        }
+        printf("\n\nCOMPLETED SUCCESSFULLY\n\n");
+    }
+    fclose(f1);
+    fclose(f2);
+}
+
