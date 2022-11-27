@@ -1,0 +1,79 @@
+#include <stdio.h>
+
+int main ()
+{
+    FILE *fptr;
+    FILE *fptr2;
+    int i, n, j, pos;
+    char str[100];
+    char fname[20]="mfile.txt";
+    char fname2[20]="xfile.txt";
+    char newch[500];
+    int wrd=1,charctr=1,rows=1;
+    char str1;
+    char ch;
+    int no_lines = 1;
+    int COUNT = 0;
+    fptr2 = fopen(fname2, "w+");
+    
+    fptr = fopen(fname,"r"); 
+    if(fptr == NULL) 
+     { 
+        printf(" \n");
+        printf("File does not exist or can not be opened."); 
+      } 
+    else 
+        { 
+          ch=fgetc(fptr); 
+          
+          printf(" \n\n");
+          printf("The content of the file %s are: \n\n", fname);
+          
+          while(ch != EOF) 
+            { 
+                printf("%c",ch); 
+                if(ch==' '||ch=='\n')
+                    {
+                        wrd++; 
+                    }
+                    else
+                    {
+                        charctr++; 
+                    }
+                if(ch=='\n')
+                    {
+                        rows++;
+                    }
+                ch=fgetc(fptr); 
+            }
+
+        int wrd1 = wrd - 1;
+        float charctr1 = charctr - 1;
+        float rows1 = rows;
+        float averageSymbol = charctr1 / rows1;
+
+        
+        printf("\n\nwrd = %d, charctr = %d", wrd, charctr-1);
+        printf("\nThe number of rows in the file %s are : %d\n", fname,rows);
+        printf("The average amount of symbols in a row is %f\n", averageSymbol);
+        printf("\n\n");
+        
+
+        }
+
+        fseek(fptr,0,SEEK_END);
+        pos=ftell(fptr);
+        i=0;
+        while(i<pos)
+            {
+            i++;
+            fseek(fptr,-i,SEEK_END);
+            ch=fgetc(fptr);
+            printf("%c",ch);
+            fputc(ch,fptr2);
+            }
+
+    fclose(fptr); 
+    fclose(fptr2); 
+    return 0;
+}
